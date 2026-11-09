@@ -1,0 +1,48 @@
+# 到訪監控：Umami 自架（R3）
+#
+# 採用「自帶 Postgres」的方式：不碰主機的 PostgreSQL 設定
+# （主機 pg 僅 listen localhost，容器無法直連，且不宜為此改動系統設定）。
+#
+# 啟動：  cd monitoring && docker compose up -d
+# 存取：  http://localhost:3100
+#         首次登入 admin / umami（登入後請立即改密碼）
+#
+# 建站後把 Website ID 填入 ../app/.env：
+#   NEXT_PUBLIC_UMAMI_SCRIPT_URL=http://localhost:3100/script.js
+#   NEXT_PUBLIC_UMAMI_WEBSITE_ID=<uuid>
+
+services:
+  umami-db:
+    image: postgres:16-alpine
+    container_name: cts-umami-db
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: umami
+      POSTGRES_USER: umami
+      POSTGRES_PASSWORD: ${UMAMI_DB_PASSWORD}
+    volumes:
+      - umami-db-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ['CMD-SHELL', 'pg_isready -U umami -d umami']
+      interval: 10s
+      timeout: 5s
+      retries: 10
+
+  umami:
+    image: ghcr.io/umami-software/umami:postgresql-latest
+    container_name: cts-umami
+    restart: unless-stopped
+    depends_on:
+      umami-db:
+        condition: service_healthy
+    ports:
+      - '3100:3000'
+    environment:
+      DATABASE_TYPE: postgresql
+      DATABASE_URL: postgresql://umami:${UMAMI_DB_PASSWORD}@umami-db:5432/umami
+      APP_SECRET: ${UMAMI_APP_SECRET}
+      DISABLE_TELEMETRY: 1
+      TRACKER_SCRIPT_NAME: script.js
+
+volumes:
+  umami-db-data:
