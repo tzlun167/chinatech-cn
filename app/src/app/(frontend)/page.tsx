@@ -42,11 +42,39 @@ export default async function HomePage() {
               联系我们
             </Link>
           </div>
+
+          <div className="hero-stats">
+            <div className="hero-stat">
+              <b>
+                {productCount.totalDocs}
+                <em>项</em>
+              </b>
+              <span>在售产品</span>
+            </div>
+            <div className="hero-stat">
+              <b>
+                {brandCount.totalDocs}
+                <em>个</em>
+              </b>
+              <span>代理品牌</span>
+            </div>
+            <div className="hero-stat">
+              <b>
+                2005
+                <em>年</em>
+              </b>
+              <span>成立至今</span>
+            </div>
+          </div>
         </div>
       </section>
 
       <section className="section">
         <div className="wrap">
+          <div className="section-head">
+            <span className="eyebrow">Our Capabilities</span>
+            <h2>专业能力</h2>
+          </div>
           <div className="info-grid">
             <div className="info-card">
               <h3>品牌代理</h3>
@@ -68,6 +96,7 @@ export default async function HomePage() {
         <div className="wrap">
           <div className="section-head section-head-row">
             <div>
+              <span className="eyebrow">Products</span>
               <h2>产品</h2>
               <p>
                 目前收录 {productCount.totalDocs} 项产品，涵盖 {brandCount.totalDocs}{' '}
@@ -96,6 +125,7 @@ export default async function HomePage() {
       <section className="section">
         <div className="wrap">
           <div className="section-head">
+            <span className="eyebrow">About Us</span>
             <h2>关于我们</h2>
           </div>
           <div className="prose">
