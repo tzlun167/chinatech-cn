@@ -1,5 +1,6 @@
 import { postgresAdapter } from '@payloadcms/db-postgres'
 import { lexicalEditor } from '@payloadcms/richtext-lexical'
+import { zhTw } from '@payloadcms/translations/languages/zhTw'
 import path from 'path'
 import { buildConfig } from 'payload'
 import { fileURLToPath } from 'url'
@@ -25,6 +26,11 @@ export default buildConfig({
     meta: {
       titleSuffix: '— 上海優電 CTS 官網管理',
     },
+  },
+  // 後台介面語系（繁體中文）；使用者可在後台自行切換
+  i18n: {
+    supportedLanguages: { zhTw },
+    fallbackLanguage: 'zhTw',
   },
   collections: [Users, Media, Brands, Categories, Products, Pages, Inquiries],
   editor: lexicalEditor(),
