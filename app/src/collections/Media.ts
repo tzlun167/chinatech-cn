@@ -6,6 +6,10 @@ import type { CollectionConfig } from 'payload'
  */
 export const Media: CollectionConfig = {
   slug: 'media',
+  labels: {
+    singular: '媒體',
+    plural: '媒體庫',
+  },
   admin: {
     group: '內容',
     description: '圖片與型錄檔案。上傳圖片建議寬度 ≥ 1200px。',

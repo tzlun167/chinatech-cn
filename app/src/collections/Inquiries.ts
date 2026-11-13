@@ -6,6 +6,10 @@ import type { CollectionConfig } from 'payload'
  */
 export const Inquiries: CollectionConfig = {
   slug: 'inquiries',
+  labels: {
+    singular: '詢價單',
+    plural: '詢價單',
+  },
   admin: {
     useAsTitle: 'name',
     group: '內容',

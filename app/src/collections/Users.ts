@@ -6,6 +6,10 @@ import type { CollectionConfig } from 'payload'
  */
 export const Users: CollectionConfig = {
   slug: 'users',
+  labels: {
+    singular: '使用者',
+    plural: '使用者',
+  },
   auth: {
     tokenExpiration: 60 * 60 * 8, // 8 小時
     maxLoginAttempts: 5,

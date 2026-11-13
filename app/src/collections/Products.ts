@@ -6,6 +6,10 @@ import type { CollectionConfig } from 'payload'
  */
 export const Products: CollectionConfig = {
   slug: 'products',
+  labels: {
+    singular: '商品',
+    plural: '商品',
+  },
   admin: {
     useAsTitle: 'name',
     group: '商品',
